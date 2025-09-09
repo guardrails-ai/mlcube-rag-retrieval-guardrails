@@ -1,27 +1,54 @@
-# to run these, run 
-# make tests
-
-from guardrails import Guard
 import pytest
-from validator import ValidatorTemplate
+from guardrails import Guard
+import sys
 
-# We use 'exception' as the validator's fail action,
-#  so we expect failures to always raise an Exception
-# Learn more about corrective actions here:
-#  https://www.guardrailsai.com/docs/concepts/output/#%EF%B8%8F-specifying-corrective-actions
-guard = Guard.from_string(validators=[ValidatorTemplate(arg_1="arg_1", arg_2="arg_2", on_fail="exception")])
+sys.path.append(".")
+from validator.prompts.prompts import RagContextUsefulnessPrompt
 
-def test_pass():
-  test_output = "pass"
-  result = guard.parse(test_output)
-  
-  assert result.validation_passed is True
-  assert result.validated_output == test_output
+from validator.main import MLcubeRagContextValidator
 
-def test_fail():
-  with pytest.raises(Exception) as exc_info:
-    test_output = "fail"
-    guard.parse(test_output)
-  
-  # Assert the exception has your error_message
-  assert str(exc_info.value) == "Validation failed for field with errors: {A descriptive but concise error message about why validation failed}"
+
+@pytest.fixture
+def guard():
+    return Guard().use(
+        MLcubeRagContextValidator(
+            rag_context_eval_prompt=RagContextUsefulnessPrompt(),
+            pass_threshold=1,
+            model_name="gpt-4o-mini",
+            on_fail="noop",  # type: ignore
+            on="prompt",
+        )
+    )
+
+
+def test_validate_pass(guard):
+    """Test validation passes when rating is above threshold."""
+    metadata = {
+        "user_input": "What is the capital of France?",
+        "retrieved_context": "The capital of France is Paris.",
+    }
+    result = guard.parse(
+        llm_output="The capital of France is Paris.", metadata=metadata
+    )
+    assert result.validation_passed is True
+
+
+def test_validate_fail(guard):
+    """Test validation fails when rating is below threshold."""
+
+    metadata = {
+        "user_input": "What is the capital of France?",
+        "retrieved_context": "The Eiffel Tower is a landmark in Paris.",
+    }
+
+    result = guard.parse(llm_output="", metadata=metadata)
+    assert result.validation_passed is False
+
+
+def test_validate_missing_metadata(guard):
+    """Test validation raises error when metadata is missing required fields."""
+    with pytest.raises(RuntimeError, match="user_input missing from value"):
+        guard.parse(llm_output="", metadata={})
+
+    with pytest.raises(RuntimeError, match="retrieved_context missing from value"):
+        guard.parse(llm_output="", metadata={"user_input": "What is the weather?"})

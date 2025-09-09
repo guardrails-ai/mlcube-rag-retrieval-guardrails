@@ -1,23 +1,29 @@
 [project]
-name = "validator-template"
-version = "0.0.0"
-description = "Template repo for Guardrails Hub validators."
+name = "rag-context-evaluator"
+version = "0.0.1"
+description = "ML3 RAG Context Evaluator"
 authors = [
-    {name = "Guardrails AI", email = "contact@guardrailsai.com"}
+    {name = "MLcube", email = "info@mlcube.com"}
 ]
 license = {file = "LICENSE"}
 readme = "README.md"
-requires-python = ">= 3.8.1"
+requires-python = ">= 3.10, <=3.13"
 dependencies = [
-    "guardrails-ai>=0.4.0"
+    "guardrails-ai>=0.5.15",
+    "langchain[openai]>=0.3.27",
 ]
 
-[project.optional-dependencies]
+
+[dependency-groups]
 dev = [
-    "pyright",
-    "pytest",
-    "ruff"
-] 
+    "mypy>=1.17.1",
+    "polars>=1.33.0",
+    "pyright>=1.1.405",
+    "pytest>=8.4.2",
+    "ruff>=0.12.12",
+    "scikit-learn>=1.7.1",
+]
+
 
 [tool.pytest.ini_options]
 minversion = "6.0"

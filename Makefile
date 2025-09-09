@@ -1,5 +1,8 @@
+
+# Use uv as dependency manager, pip should work anyway
 dev:
-	pip install -e ".[dev]"
+# 	pip install -e ".[dev]"
+	uv sync --all-extras --no-cache
 
 lint:
 	ruff check .
