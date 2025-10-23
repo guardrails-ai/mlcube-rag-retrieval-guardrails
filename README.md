@@ -161,7 +161,7 @@ Note:
   | `retrieved_context` | String | The context retrieved and used by the RAG system. | N/A (Required) |
   | `min_range_value` | String | The minimum value for the rating range used by the LLM judge. | 0 (the default of the validator class) |
   | `max_range_value` | String | The maximum value for the rating range used by the LLM judge. | 1 (the default of the validator class) |
-  </ul>
+</ul>
 
 **Returns**
 
