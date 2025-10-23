@@ -153,8 +153,10 @@ Note:
 
 **Parameters**
 
-- **`value`** _(Any)_: The input value to validate.
-- **`metadata`** _(dict)_: A dictionary containing metadata required for validation. Keys and values must match the expectations of this validator.
+- **`value`** *(Any)*: The input value to validate.
+- **`metadata`** *(dict)*: A dictionary containing metadata required for validation. Keys and values must match the expectations of this validator.
+
+
   | Key | Type | Description | Default |
   | --- | --- | --- | --- |
   | `user_input` | String | The original user query passed into the RAG system. | N/A (Required) |
