@@ -20,9 +20,9 @@ jobs:
       - name: Run qa
         run: |
           make dev
-          ruff_loc=$(which ruff)
+          ruff_loc="$(which ruff)"
           echo "ruff located at $ruff_loc"
-          ruff_installation=$(pip show ruff)
+          ruff_installation="$(pip show ruff)"
           echo "ruff installation: "
           echo "$ruff_installation"
           make qa
