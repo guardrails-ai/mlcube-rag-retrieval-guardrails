@@ -18,4 +18,6 @@ jobs:
       - name: Run qa
         run: |
           make dev
+          which ruff
+          pip show ruff
           make qa
