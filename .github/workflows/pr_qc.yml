@@ -9,11 +9,13 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v7
         with:
           python-version: 3.11
       - name: Run qa
         run: |
-          pip install ".[dev]"
+          python -m venv ./.venv
+          source ./.venv/bin/activate
+          make dev
           make qa
