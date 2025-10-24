@@ -1,6 +1,4 @@
 from typing import Any, Callable, Dict, Optional
-from guardrails import Guard
-import openai
 import logging
 from guardrails.validator_base import (
     FailResult,
