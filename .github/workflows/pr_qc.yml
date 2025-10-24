@@ -13,7 +13,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: 3.11
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v7
       - name: Run qa
         run: |
-          pip install ".[dev]"
+          make dev
           make qa
