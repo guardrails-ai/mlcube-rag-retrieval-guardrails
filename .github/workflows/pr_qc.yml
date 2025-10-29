@@ -12,8 +12,11 @@ jobs:
       - name: Install the latest version of uv
         uses: astral-sh/setup-uv@v7
         with:
+          enable-cache: false
           python-version: 3.11
       - name: Run qa
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           python -m venv ./.venv
           source ./.venv/bin/activate
