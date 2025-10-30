@@ -153,15 +153,17 @@ Note:
 
 **Parameters**
 
-- **`value`** _(Any)_: The input value to validate.
-- **`metadata`** _(dict)_: A dictionary containing metadata required for validation. Keys and values must match the expectations of this validator.
+- **`value`** *(Any)*: The input value to validate.
+- **`metadata`** *(dict)*: A dictionary containing metadata required for validation. Keys and values must match the expectations of this validator.
+
+
   | Key | Type | Description | Default |
   | --- | --- | --- | --- |
   | `user_input` | String | The original user query passed into the RAG system. | N/A (Required) |
   | `retrieved_context` | String | The context retrieved and used by the RAG system. | N/A (Required) |
   | `min_range_value` | String | The minimum value for the rating range used by the LLM judge. | 0 (the default of the validator class) |
   | `max_range_value` | String | The maximum value for the rating range used by the LLM judge. | 1 (the default of the validator class) |
-  </ul>
+</ul>
 
 **Returns**
 
