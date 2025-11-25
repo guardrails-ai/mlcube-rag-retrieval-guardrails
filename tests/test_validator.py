@@ -3,7 +3,7 @@ from guardrails import Guard
 import sys
 
 sys.path.append(".")
-from validator.prompts.prompts import RagContextUsefulnessPrompt
+from validator.prompts import RagContextUsefulnessPrompt
 
 from validator.main import MLcubeRagContextValidator
 

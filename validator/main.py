@@ -8,10 +8,10 @@ from guardrails.validator_base import (
     register_validator,
 )
 import litellm
-from validator.prompts.prompts import (
+from .prompts import (
     Ml3RagContextEvalBasePrompt,
 )
-from validator.models import RagRatingResponse
+from .models import RagRatingResponse
 from langchain import chat_models
 
 logger = logging.getLogger(__name__)

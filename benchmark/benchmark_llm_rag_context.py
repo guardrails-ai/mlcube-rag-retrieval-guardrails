@@ -45,7 +45,7 @@ from sklearn.metrics import classification_report
 
 sys.path.append(".")
 from guardrails import Guard
-from validator.prompts.prompts import (
+from validator.prompts import (
     Ml3RagContextEvalBasePrompt,
     RagContextUsefulnessPrompt,
 )

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-from validator.enums import TextLanguage
-from validator.prompts.prompt_hub import (
+from .enums import TextLanguage
+from .prompt_hub import (
     RAG_CONTEXT_RELEVANCE_PROMPT,
     RAG_CONTEXT_USEFULNESS_PROMPT,
 )

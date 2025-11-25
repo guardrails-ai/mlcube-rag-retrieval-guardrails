@@ -32,9 +32,6 @@ It can be used in a RAG system to prevent the model from hallucinating or genera
 In this example we apply the RagContextValidator to validate the relevance of the retrieved context to the user's query.
 
 ```python
-from validator.prompts.prompts import RagContextRelevancePrompt
-from validator.main import MLcubeRagContextValidator
-from guardrails import Guard
 
 # Define the guard with the MLcubeRagContextValidator,
 # specifying the relevance prompt generator to enable
@@ -87,11 +84,6 @@ assert not response.validation_passed
 In this example we evaluate the usefulness of the retrieved context to the user's query. This time we call the `parse` method of the guard directly.
 
 ```python
-
-from validator.prompts.prompts import (
-    RagContextRelevancePrompt,
-    RagContextUsefulnessPrompt,
-)
 
 guard = Guard().use(
     MLcubeRagContextValidator(
